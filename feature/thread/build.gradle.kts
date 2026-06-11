@@ -22,12 +22,14 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-        freeCompilerArgs += listOf(
-            "-opt-in=kotlin.RequiresOptIn",
-            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-        )
+    kotlin {
+        jvmToolchain(17)
+        compilerOptions {
+            freeCompilerArgs.addAll(
+                "-opt-in=kotlin.RequiresOptIn",
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            )
+        }
     }
 
     buildFeatures {
@@ -88,3 +90,5 @@ dependencies {
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit4)
 }
+
+

@@ -20,8 +20,8 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        jvmToolchain(17)
     }
 
     buildFeatures {
@@ -32,7 +32,6 @@ android {
 wire {
     kotlin {
         javaInterop = true
-        grpcCompatibility = true
     }
 }
 
@@ -52,7 +51,6 @@ dependencies {
 
     // Wire (Protobuf)
     implementation(libs.wire.runtime)
-    implementation(libs.wire.grpc.client)
 
     // Module Dependencies
     implementation(project(":core:common"))

@@ -19,8 +19,8 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        jvmToolchain(17)
     }
 
     buildFeatures {
@@ -63,3 +63,4 @@ dependencies {
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit4)
 }
+
