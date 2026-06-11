@@ -9,3 +9,4 @@ plugins {
     alias(libs.plugins.wire) apply false
     alias(libs.plugins.google.services) apply false
 }
+
