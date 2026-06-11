@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewTieba</string>
+    <string name="home">首页</string>
+    <string name="forum">吧</string>
+    <string name="thread">帖子</string>
+    <string name="search">搜索</string>
+    <string name="profile">我</string>
+    <string name="message">消息</string>
+    <string name="settings">设置</string>
+    <string name="login">登录</string>
+    <string name="logout">退出登录</string>
+    <string name="loading">加载中...</string>
+    <string name="error_network">网络错误，请检查网络连接</string>
+    <string name="error_unknown">未知错误</string>
+    <string name="retry">重试</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="reply">回复</string>
+    <string name="like">点赞</string>
+    <string name="dislike">踩</string>
+    <string name="follow">关注</string>
+    <string name="unfollow">取关</string>
+    <string name="sign">签到</string>
+    <string name="search_hint">搜索吧、帖子或用户</string>
+    <string name="no_data">暂无数据</string>
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放刷新</string>
+    <string name="refreshing">刷新中...</string>
+    <string name="load_more">加载更多</string>
+    <string name="no_more_data">没有更多数据了</string>
+</resources>
