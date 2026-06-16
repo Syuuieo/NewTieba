@@ -1,5 +1,6 @@
 package com.newtieba.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +23,7 @@ import com.newtieba.data.model.ContentPiece
 import com.newtieba.data.model.ContentType
 import com.newtieba.data.model.Post
 import com.newtieba.util.DateFormatter
-import top.yukonga.miuix.kmp.basic.ClickableText
+import top.yukonga.miuix.kmp.basic.MiuixTheme
 
 @Composable
 fun PostCard(
@@ -33,7 +34,6 @@ fun PostCard(
 ) {
     Card(modifier = modifier.padding(vertical = 4.dp)) {
         Column(modifier = Modifier.padding(12.dp)) {
-            // 用户行
             Row(verticalAlignment = Alignment.CenterVertically) {
                 UserAvatar(portrait = post.author.portrait, size = 28.dp)
                 Spacer(Modifier.width(8.dp))
@@ -52,10 +52,8 @@ fun PostCard(
 
             Spacer(Modifier.height(8.dp))
 
-            // 富文本内容
             RichTextContent(pieces = post.content)
 
-            // 图片
             if (post.images.isNotEmpty()) {
                 Spacer(Modifier.height(4.dp))
                 ImageGrid(images = post.images, onImageClick = onImageClick)
@@ -63,7 +61,6 @@ fun PostCard(
 
             Spacer(Modifier.height(4.dp))
 
-            // 时间 + 点赞
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = DateFormatter.format(post.time),
@@ -85,7 +82,6 @@ fun PostCard(
                 )
             }
 
-            // 楼中楼数量提示
             if (post.subPostCount > 0) {
                 Spacer(Modifier.height(4.dp))
                 Text(
@@ -116,11 +112,11 @@ fun RichTextContent(
                     style = MiuixTheme.textStyles.body2,
                     color = MiuixTheme.colorScheme.primary,
                 )
-                ContentType.LINK -> ClickableText(
+                ContentType.LINK -> Text(
                     text = piece.text,
                     style = MiuixTheme.textStyles.body2,
                     color = MiuixTheme.colorScheme.primary,
-                    onClick = { /* TODO: CustomTabsIntent */ },
+                    modifier = Modifier.clickable { /* TODO: CustomTabsIntent */ },
                 )
                 ContentType.EMOJI -> Text(
                     text = piece.text,

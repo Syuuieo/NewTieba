@@ -32,7 +32,6 @@ fun SettingsScreen(
             TopAppBar(
                 title = "设置",
                 onBack = onBack,
-                scrollBehavior = rememberScrollBehavior(),
             )
         },
     ) { paddingValues ->

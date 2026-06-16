@@ -9,7 +9,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -20,10 +19,10 @@ import com.newtieba.ui.navigation.bottomNavItems
 import com.newtieba.ui.theme.NewTiebaTheme
 import dagger.hilt.android.AndroidEntryPoint
 import top.yukonga.miuix.kmp.basic.FloatingActionButton
+import top.yukonga.miuix.kmp.basic.Icon
 import top.yukonga.miuix.kmp.basic.NavigationBar
 import top.yukonga.miuix.kmp.basic.NavigationBarItem
 import top.yukonga.miuix.kmp.basic.Scaffold
-import top.yukonga.miuix.kmp.basic.icon
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -64,12 +63,12 @@ fun MainScreen() {
                                 }
                             },
                             icon = {
-                                icon(
+                                Icon(
                                     imageVector = screen.icon!!,
                                     contentDescription = screen.title,
                                 )
                             },
-                            title = screen.title,
+                            label = screen.title,
                         )
                     }
                 }
@@ -82,7 +81,7 @@ fun MainScreen() {
                         navController.navigate(Screen.CreatePost.route)
                     },
                 ) {
-                    icon(Icons.Default.Add, "发帖")
+                    Icon(Icons.Default.Add, "发帖")
                 }
             }
         },

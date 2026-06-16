@@ -37,7 +37,7 @@ fun LoginScreen(
             TopAppBar(
                 title = "登录百度贴吧",
                 onBack = onBack,
-                scrollBehavior = rememberScrollBehavior(),
+            )
             )
         },
     ) { paddingValues ->

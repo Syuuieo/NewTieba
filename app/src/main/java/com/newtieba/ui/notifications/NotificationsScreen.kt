@@ -31,7 +31,6 @@ import top.yukonga.miuix.kmp.basic.MiuixTheme
 import top.yukonga.miuix.kmp.basic.Scaffold
 import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.basic.TopAppBar
-import top.yukonga.miuix.kmp.basic.rememberScrollBehavior
 
 @Composable
 fun NotificationsScreen(
@@ -45,7 +44,6 @@ fun NotificationsScreen(
             TopAppBar(
                 title = "通知",
                 onBack = onBack,
-                scrollBehavior = rememberScrollBehavior(),
             )
         },
     ) { paddingValues ->
