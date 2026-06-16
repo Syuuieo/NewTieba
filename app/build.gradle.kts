@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -113,6 +112,7 @@ dependencies {
     implementation(libs.miuix.ui)
     implementation(libs.miuix.preference)
 
-    // Protobuf — 使用 ProtoReader 手工解析，不自动生成代码
+    // Protobuf — 使用 ProtoReader 手工解析
+    // protobuf-lite 库保留供实际解析用
     implementation(libs.protobuf.lite)
 }
