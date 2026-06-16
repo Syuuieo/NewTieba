@@ -36,10 +36,12 @@ jobs:
 
       - name: Install Android 37 SDK
         run: |
+          echo "=== Available android-37 platforms ==="
+          sdkmanager --list 2>/dev/null | grep "platforms;android" || true
+          echo "=== Installing ==="
           sdkmanager "platforms;android-37.0"
           sdkmanager "build-tools;37.0.0"
-          ln -sf android-37.0 "$ANDROID_SDK_ROOT/platforms/android-37"
-          echo "=== Installed platforms ==="
+          echo "=== Installed ==="
           ls -la $ANDROID_SDK_ROOT/platforms/
 
       - name: Setup Gradle
