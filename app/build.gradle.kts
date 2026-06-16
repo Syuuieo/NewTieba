@@ -9,9 +9,7 @@ plugins {
 
 android {
     namespace = "com.newtieba"
-    compileSdk = 37
-
-    defaultConfig {
+    compileSdk = 37    defaultConfig {
         applicationId = "com.newtieba"
         minSdk = 26
         targetSdk = 37

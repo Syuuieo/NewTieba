@@ -34,16 +34,18 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses > /dev/null 2>&1 || true
 
-      - name: List android-37 packages
+      - name: Install Android 37 SDK
         run: |
-          echo "=== channel 0 ==="
-          sdkmanager --channel=0 --list 2>/dev/null | grep -i "android.37" || echo "(none)"
-          echo "=== channel 3 (canary) ==="
-          sdkmanager --channel=3 --list 2>/dev/null | grep -i "android.37" || echo "(none)"
-          echo "=== ALL packages with 37 ==="
-          sdkmanager --list 2>/dev/null | grep -i "37" || echo "(none)"
-          echo "=== Installed SDK ==="
-          ls -la ${ANDROID_SDK_ROOT}/platforms/ 2>/dev/null || echo "no platforms dir"
+          # Android 37.0 (API 37) preview — package name has ".0" suffix
+          sdkmanager --channel=0 "platforms;android-37.0"
+          sdkmanager "build-tools;37.0.0"
+          # AGP 8.7.3 looks for platforms/android-37, create fallback symlink
+          if [ -d "$ANDROID_SDK_ROOT/platforms/android-37.0" ] && [ ! -d "$ANDROID_SDK_ROOT/platforms/android-37" ]; then
+            ln -s android-37.0 "$ANDROID_SDK_ROOT/platforms/android-37"
+            echo "Created symlink: android-37 -> android-37.0"
+          fi
+          echo "Installed platforms:"
+          ls -la $ANDROID_SDK_ROOT/platforms/
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
