@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import top.yukonga.miuix.kmp.basic.Scaffold
 import top.yukonga.miuix.kmp.basic.TopAppBar
-import top.yukonga.miuix.kmp.basic.rememberScrollBehavior
 import top.yukonga.miuix.kmp.extra.ArrowPreference
 import top.yukonga.miuix.kmp.extra.OverlayDropdownPreference
 import top.yukonga.miuix.kmp.extra.SliderPreference
