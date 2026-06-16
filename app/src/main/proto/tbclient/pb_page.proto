@@ -3,6 +3,7 @@ syntax = "proto2";
 package tbclient;
 
 import "tbclient/common.proto";
+import "tbclient/frs_page.proto";
 
 // ============================================================
 // 帖子详情页相关数据结构
