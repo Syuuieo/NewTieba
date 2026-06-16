@@ -5,6 +5,12 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
+}
+
 android {
     namespace = "com.newtieba"
     compileSdk = 37
@@ -47,19 +53,11 @@ android {
     }
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-    }
-}
-
 dependencies {
     // AndroidX Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.annotation)
-    // Force kotlin-stdlib version to match compiler (avoid 2.4.0 from transitive deps)
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${libs.versions.kotlin.get()}")
 
     // Compose BOM
     implementation(platform(libs.compose.bom))
