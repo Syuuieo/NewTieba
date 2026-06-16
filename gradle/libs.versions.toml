@@ -73,10 +73,6 @@ coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutin
 miuix-ui = { group = "top.yukonga.miuix.kmp", name = "miuix-ui-android", version.ref = "miuix" }
 miuix-preference = { group = "top.yukonga.miuix.kmp", name = "miuix-preference", version.ref = "miuix" }
 
-# Protobuf
-protobuf-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf-lite" }
-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protoc" }
-
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
