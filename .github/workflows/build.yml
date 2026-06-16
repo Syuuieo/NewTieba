@@ -38,6 +38,8 @@ jobs:
         run: |
           sdkmanager --channel=3 "platforms;android-37.0"
           sdkmanager --channel=3 "build-tools;37.0.0"
+          # AGP 9.x looks for android-37, SDK installs as android-37.0
+          ln -sf android-37.0 "$ANDROID_SDK_ROOT/platforms/android-37"
           echo "=== Installed ==="
           ls -lah $ANDROID_SDK_ROOT/platforms/
 

@@ -2,18 +2,12 @@ package com.newtieba.data.api.interceptor
 
 import com.newtieba.data.api.ProtobufConverterFactory
 import okhttp3.RequestBody
-import okhttp3.internal.and
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.util.zip.Inflater
 
 /**
  * Protobuf 请求构建与响应解压工具
- *
- * 贴吧 App 的 Protobuf 接口使用标准 proto2 序列化，
- * 部分接口响应是 zlib 压缩的。
- *
- * 提供简易 ProtoBuffer 编码器用于手动构造 proto 二进制，
- * 后续可迁移至 protobuf-lite 自动生成代码。
  */
 object ProtoHelper {
 
@@ -23,11 +17,8 @@ object ProtoHelper {
         return protoBytes.toRequestBody(ProtobufConverterFactory.PROTOBUF_MEDIA_TYPE)
     }
 
-    /**
-     * 解压 zlib 压缩的响应数据
-     */
     fun decompress(data: ByteArray): ByteArray {
-        if (data.size < 2 || (data[0] and 0xFF) != 0x78) {
+        if (data.size < 2 || (data[0].toInt() and 0xFF) != 0x78) {
             return data
         }
         val inflater = Inflater()
@@ -46,9 +37,6 @@ object ProtoHelper {
         }
     }
 
-    // ── 简易 Proto2 编码器辅助方法 ──────────────────────────────
-
-    /** 构建一条 proto2 message 的原始 bytes */
     fun buildProtoMessage(block: ProtoBuffer.() -> Unit): ByteArray {
         val buf = ProtoBuffer()
         buf.block()
@@ -79,9 +67,6 @@ object ProtoHelper {
         writeVarint(value)
     }
 }
-
-// ── Proto2 编码器类 ──────────────────────────────────────────
-// 字段编码参考: https://protobuf.dev/programming-guides/encoding/
 
 class ProtoBuffer {
     val data = ByteArrayOutputStream()
