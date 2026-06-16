@@ -36,15 +36,12 @@ jobs:
 
       - name: Install Android 37 SDK
         run: |
-          # Android 37.0 (API 37) preview — package name has ".0" suffix
-          sdkmanager --channel=0 "platforms;android-37.0"
+          sdkmanager "platforms;android-37.0"
           sdkmanager "build-tools;37.0.0"
-          # AGP 8.7.3 looks for platforms/android-37, create fallback symlink
-          if [ -d "$ANDROID_SDK_ROOT/platforms/android-37.0" ] && [ ! -d "$ANDROID_SDK_ROOT/platforms/android-37" ]; then
-            ln -s android-37.0 "$ANDROID_SDK_ROOT/platforms/android-37"
-            echo "Created symlink: android-37 -> android-37.0"
-          fi
-          echo "Installed platforms:"
+          # AGP 9.2.0 looks for platforms/android-37, but sdkmanager installs as android-37.0
+          # Create symlink to bridge the gap
+          ln -sf android-37.0 "$ANDROID_SDK_ROOT/platforms/android-37"
+          echo "=== Installed platforms ==="
           ls -la $ANDROID_SDK_ROOT/platforms/
 
       - name: Setup Gradle
