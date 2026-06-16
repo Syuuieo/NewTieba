@@ -31,14 +31,34 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Accept licenses & install Android SDK
+      - name: Accept licenses & update sdkmanager
         run: |
           yes | sdkmanager --licenses > /dev/null 2>&1 || true
-          # Android 37 (API 37) = Android 17 preview — needs canary channel
+          sdkmanager --update
+
+      - name: Install Android 37 SDK
+        run: |
+          echo "=== Listing android-37 packages ==="
+          # Try multiple channel sources for android-37 preview
+          for channel in 0 1 2 3; do
+            echo "--- channel=$channel ---"
+            sdkmanager --channel=$channel --list 2>/dev/null | grep "android-37" || true
+          done
+          echo "=== Installing ==="
+          # Try canary channel first, then fallback to all channels
           sdkmanager --channel=3 "platforms;android-37" || \
-            sdkmanager --channel=3 --sdk_root=$ANDROID_SDK_ROOT "platforms;android-37"
+            sdkmanager --channel=0 "platforms;android-37" || \
+            echo "WARNING: android-37 not available via sdkmanager"
           sdkmanager "build-tools;37.0.0" || \
-            sdkmanager --channel=3 "build-tools;37.0.0"
+            sdkmanager --channel=3 "build-tools;37.0.0" || \
+            echo "WARNING: build-tools;37.0.0 not available"
+
+      - name: Verify installed SDKs
+        run: |
+          echo "Installed platforms:"
+          ls -la ${ANDROID_SDK_ROOT}/platforms/ || true
+          echo "Installed build-tools:"
+          ls -la ${ANDROID_SDK_ROOT}/build-tools/ || true
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
