@@ -1,0 +1,90 @@
+syntax = "proto2";
+
+package tbclient;
+
+import "tbclient/common.proto";
+
+// ============================================================
+// 帖子详情页相关数据结构
+// ============================================================
+
+message Post {
+    optional uint64 id = 1;                // pid
+    optional uint32 floor = 2;             // 楼层号
+    optional User author = 3;
+    optional uint64 time = 6;
+    optional uint32 sub_post_number = 8;   // 楼中楼数量
+    optional uint32 agree_num = 10;
+    optional uint32 is_agree = 14;
+    repeated PbContent content = 15;       // 富文本内容
+    repeated Media media = 16;             // 媒体
+}
+
+message SubPost {
+    optional uint64 id = 1;                // 楼中楼 pid
+    optional User author = 3;
+    optional uint64 time = 4;
+    repeated PbContent content = 7;
+}
+
+// ── PbPage (帖子楼层) ────────────────────────────────────────
+
+message PbPageReqData {
+    optional uint64 tid = 1;               // 主题帖 ID
+    optional uint32 pn = 2;                // 页码
+    optional uint32 rn = 3;
+    optional uint32 is_fold = 4;           // 是否只看楼主
+}
+
+message PbPageReqIdl {
+    message DataWrapper {
+        optional PbPageReqData data = 1;
+    }
+    optional DataWrapper data = 1;
+}
+
+message PbPageResData {
+    optional ThreadInfo thread = 1;
+    repeated Post post_list = 2;
+    optional User user = 3;
+    optional uint32 total_page = 7;
+    optional uint32 total_count = 8;
+}
+
+message PbPageResIdl {
+    message DataWrapper {
+        optional PbPageResData data = 1;
+    }
+    optional DataWrapper data = 1;
+    optional uint32 error_code = 2;
+    optional string error_msg = 3;
+}
+
+// ── PbFloor (楼中楼) ──────────────────────────────────────────
+
+message PbFloorReqData {
+    optional uint64 tid = 1;
+    optional uint64 pid = 2;               // 楼层 pid
+    optional uint32 pn = 3;
+    optional uint32 rn = 4;
+}
+
+message PbFloorReqIdl {
+    message DataWrapper {
+        optional PbFloorReqData data = 1;
+    }
+    optional DataWrapper data = 1;
+}
+
+message PbFloorResData {
+    repeated SubPost post_list = 2;
+}
+
+message PbFloorResIdl {
+    message DataWrapper {
+        optional PbFloorResData data = 1;
+    }
+    optional DataWrapper data = 1;
+    optional uint32 error_code = 2;
+    optional string error_msg = 3;
+}

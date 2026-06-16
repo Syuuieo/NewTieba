@@ -1,0 +1,17 @@
+package com.newtieba.ui.theme
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import top.yukonga.miuix.kmp.basic.MiuixTheme
+import top.yukonga.miuix.kmp.theme.ColorSchemeMode
+import top.yukonga.miuix.kmp.theme.ThemeController
+
+@Composable
+fun NewTiebaTheme(
+    content: @Composable () -> Unit
+) {
+    val controller = remember { ThemeController(ColorSchemeMode.System) }
+    MiuixTheme(controller = controller) {
+        content()
+    }
+}

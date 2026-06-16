@@ -1,0 +1,59 @@
+syntax = "proto2";
+
+package tbclient;
+
+import "tbclient/common.proto";
+
+// ============================================================
+// 主题帖相关数据结构
+// ============================================================
+
+message ThreadInfo {
+    optional uint64 id = 1;             // tid
+    optional uint32 type = 2;
+    optional string title = 3;          // 标题
+    optional uint64 reply_num = 4;      // 回复数
+    optional uint32 is_good = 5;        // 是否精品
+    optional uint32 is_top = 6;         // 是否置顶
+    optional User author = 7;
+    optional uint64 create_time = 8;    // 创建时间
+    optional uint64 last_time_int = 11; // 最后回复时间
+    optional uint32 agree_num = 15;     // 点赞数
+    optional string abstract = 21;      // 正文摘要
+    repeated Media media = 22;          // 图片/视频
+    optional uint32 share_num = 24;     // 转发数
+}
+
+// ── FrsPage (吧主题帖列表) ────────────────────────────────────
+
+message FrsPageReqData {
+    optional string kw = 1;             // 吧名
+    optional uint32 pn = 2;             // 页码
+    optional uint32 rn = 3;             // 每页条数
+    optional uint32 sort_type = 4;      // 排序: 5=按回复时间
+    optional uint32 is_good = 5;        // 1=精品帖
+}
+
+message FrsPageReqIdl {
+    message DataWrapper {
+        optional FrsPageReqData data = 1;
+    }
+    optional DataWrapper data = 1;
+}
+
+message FrsPageResData {
+    optional ForumInfo forum = 1;
+    repeated ThreadInfo thread_list = 2;
+    optional User user = 3;
+    optional uint32 page_num = 5;
+    optional uint32 total_count = 6;
+}
+
+message FrsPageResIdl {
+    message DataWrapper {
+        optional FrsPageResData data = 1;
+    }
+    optional DataWrapper data = 1;
+    optional uint32 error_code = 2;
+    optional string error_msg = 3;
+}

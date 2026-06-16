@@ -1,0 +1,47 @@
+syntax = "proto2";
+
+package tbclient;
+
+// ============================================================
+// 通用数据类型（参考 n0099/tbclient.protobuf）
+// ============================================================
+
+message User {
+    optional uint64 id = 1;         // uid
+    optional string name = 2;       // 用户名
+    optional string portrait = 3;   // 头像 portrait（拼接 URL 用）
+    optional string intro = 10;     // 个人签名
+    optional uint32 level_id = 12;  // 等级
+    optional uint32 sex = 5;        // 性别
+}
+
+message PbContent {
+    optional int32 type = 1;        // 0=文字, 1=链接, 2=表情, 3=图片, 4=@用户, 9=视频
+    optional string text = 2;       // 文字内容
+    optional string link = 5;       // 链接 URL
+    optional string src = 6;        // 图片/表情 URL
+    optional string cdn_src = 7;    // CDN 图片 URL
+    optional User user = 9;         // @用户信息
+}
+
+message Media {
+    optional string src = 1;        // 图片/视频封面 URL
+    optional string original_src = 2; // 原图 URL
+    optional uint32 width = 3;
+    optional uint32 height = 4;
+    optional uint32 is_gif = 6;
+}
+
+message AgreeInfo {
+    optional uint32 agree_num = 1;  // 点赞数
+    optional uint32 is_agree = 2;   // 当前用户是否已赞
+}
+
+message ForumInfo {
+    optional uint64 id = 1;         // fid
+    optional string name = 2;       // 吧名
+    optional uint32 member_num = 3; // 关注人数
+    optional uint32 thread_num = 4; // 帖子数
+    optional string avatar = 6;     // 吧头像
+    optional uint32 is_like = 10;   // 是否已关注
+}

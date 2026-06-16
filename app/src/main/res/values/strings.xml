@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewTieba</string>
+    <string name="home_title">我的贴吧</string>
+    <string name="hot_title">热门</string>
+    <string name="message_title">消息</string>
+    <string name="profile_title">我的</string>
+    <string name="search_title">搜索</string>
+    <string name="settings_title">设置</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_hot">热门</string>
+    <string name="nav_message">消息</string>
+    <string name="nav_profile">我的</string>
+    <string name="fab_post">发帖</string>
+    <string name="post_thread">帖子详情</string>
+    <string name="loading">加载中…</string>
+    <string name="error_unknown">未知错误</string>
+    <string name="retry">重试</string>
+</resources>
