@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.newtieba"
-    compileSdk = 37
+    compileSdkPreview = "37.0"
 
     defaultConfig {
         applicationId = "com.newtieba"
         minSdk = 26
-        targetSdk = 37
+        targetSdkPreview = "37.0"
         versionCode = 1
         versionName = "1.0.0"
     }

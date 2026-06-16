@@ -36,27 +36,8 @@ jobs:
 
       - name: Install Android 37 SDK
         run: |
-          sdkmanager "platforms;android-37.0"
-          sdkmanager "build-tools;37.0.0"
-          echo "=== Installed platforms ==="
-          ls -la $ANDROID_SDK_ROOT/platforms/
-
-      - name: Create android-37 SDK directory for AGP compatibility
-        run: |
-          # SDK installs as android-37.0 but AGP 8.x looks for android-37
-          if [ -d "$ANDROID_SDK_ROOT/platforms/android-37.0" ] && [ ! -d "$ANDROID_SDK_ROOT/platforms/android-37" ]; then
-            mkdir -p "$ANDROID_SDK_ROOT/platforms/android-37"
-            cp -r "$ANDROID_SDK_ROOT/platforms/android-37.0/"* "$ANDROID_SDK_ROOT/platforms/android-37/"
-            # Fix source.properties to report ApiLevel=37
-            sed -i 's/AndroidVersion.ApiLevel=37\.0/AndroidVersion.ApiLevel=37/' \
-              "$ANDROID_SDK_ROOT/platforms/android-37/source.properties" 2>/dev/null || true
-            sed -i 's/Platform.Version=37\.0/Platform.Version=37/' \
-              "$ANDROID_SDK_ROOT/platforms/android-37/source.properties" 2>/dev/null || true
-            echo "=== Android-37 created with source.properties ==="
-            cat "$ANDROID_SDK_ROOT/platforms/android-37/source.properties"
-          fi
-          echo "=== Final platform directories ==="
-          ls -la $ANDROID_SDK_ROOT/platforms/
+          sdkmanager --channel=3 "platforms;android-37.0"
+          sdkmanager --channel=3 "build-tools;37.0.0"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
