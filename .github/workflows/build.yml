@@ -36,8 +36,14 @@ jobs:
 
       - name: Install Android 37 SDK
         run: |
+          # Clean any previous broken SDK installations
+          rm -rf $ANDROID_SDK_ROOT/platforms/android-37
+          rm -rf $ANDROID_SDK_ROOT/platforms/android-37.0
+          # Install from canary channel
           sdkmanager --channel=3 "platforms;android-37.0"
           sdkmanager --channel=3 "build-tools;37.0.0"
+          echo "=== Installed platforms ==="
+          ls -la $ANDROID_SDK_ROOT/platforms/
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
