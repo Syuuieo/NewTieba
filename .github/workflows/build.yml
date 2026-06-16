@@ -36,14 +36,20 @@ jobs:
 
       - name: Install Android 37 SDK
         run: |
-          # Clean any previous broken SDK installations
+          # Clean previous broken installations
           rm -rf $ANDROID_SDK_ROOT/platforms/android-37
           rm -rf $ANDROID_SDK_ROOT/platforms/android-37.0
-          # Install from canary channel
+          # Install SDK from canary channel
           sdkmanager --channel=3 "platforms;android-37.0"
           sdkmanager --channel=3 "build-tools;37.0.0"
+          # AGP 8.x looks for platforms/android-37 but SDK installs as android-37.0
+          # Can't rename (breaks sdkmanager metadata), must symlink
+          # Symlink android-37 -> android-37.0 is safe: source.properties stays in android-37.0
+          ln -sf android-37.0 "$ANDROID_SDK_ROOT/platforms/android-37"
           echo "=== Installed platforms ==="
           ls -la $ANDROID_SDK_ROOT/platforms/
+          echo "=== source.properties (via symlink) ==="
+          cat "$ANDROID_SDK_ROOT/platforms/android-37/source.properties" 2>/dev/null || true
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
