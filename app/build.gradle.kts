@@ -113,19 +113,6 @@ dependencies {
     implementation(libs.miuix.ui)
     implementation(libs.miuix.preference)
 
-    // Protobuf
+    // Protobuf — 使用 ProtoReader 手工解析，不自动生成代码
     implementation(libs.protobuf.lite)
-}
-
-protobuf {
-    protoc { artifact = libs.protoc.get().toString() }
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                create("kotlin") {
-                    option("lite")
-                }
-            }
-        }
-    }
 }
