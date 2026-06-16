@@ -111,8 +111,4 @@ dependencies {
     // Miuix
     implementation(libs.miuix.ui)
     implementation(libs.miuix.preference)
-
-    // Protobuf — 使用 ProtoReader 手工解析
-    // protobuf-lite 库保留供实际解析用
-    implementation(libs.protobuf.lite)
 }
