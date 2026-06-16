@@ -1,8 +1,8 @@
-name: Build APK
+name: Android CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
     tags: [ 'v*' ]
   workflow_dispatch:
     inputs:
@@ -27,6 +27,14 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android 37 SDK
+        run: |
+          sdkmanager "platforms;android-37"
+          sdkmanager "build-tools;37.0.0"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -54,11 +62,9 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
-          # Zipalign
           ${ANDROID_SDK_ROOT}/build-tools/37.0.0/zipalign -v 4 \
             app/build/outputs/apk/release/app-release-unsigned.apk \
             NewTieba-${{ github.ref_name }}_aligned.apk
-          # Sign
           ${ANDROID_SDK_ROOT}/build-tools/37.0.0/apksigner sign \
             --ks app/keystore.jks \
             --ks-pass env:KEYSTORE_PASSWORD \
