@@ -17,7 +17,6 @@ import top.yukonga.miuix.kmp.basic.MiuixTheme
 import top.yukonga.miuix.kmp.basic.Scaffold
 import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.basic.TopAppBar
-import top.yukonga.miuix.kmp.basic.rememberScrollBehavior
 
 /**
  * 贴吧 WebView 登录页
